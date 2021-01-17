@@ -18,17 +18,19 @@ class Users {
         this._state = newArray;
     };
 
-    deleteUser() {
-        const length = this.getLength();
-        // if(this._state.length > 0) {
-        //     const elem = this._state.map(element => element.name);
-        //     // const index = this._state.indexOf();
-        //     // this._state.splice()
-        //     return elem;
-        // } else {
-        //     return 'в users ничего нет';
-        // }
-
+    deleteUser(userId) {
+        if(this.getLength() > 0) {
+            const allIds = this.getUsers().map(elem => elem.id)
+            if(allIds.includes(userId)) {
+                const index = allIds.indexOf(userId);
+                this.getUsers().splice(index, 1);
+                return index;
+            } else {
+                return 'This id does not exist'
+            }
+        } else {
+            return 'There is nothing in Users';
+        }
     };
 
     getLength() {

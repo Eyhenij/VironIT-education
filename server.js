@@ -5,6 +5,10 @@ const port = 3000;
 const hostname = 'localhost';
 const app = express();
 
+// body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/users', require('./routes/api/users')); //users API routes
 
