@@ -2,10 +2,10 @@ class Users {
 
     _state = [];
 
-    setNewUser(name, age, id) {
+    setNewUser(name, email, id) {
         this._state.push({
             name: name,
-            age: age,
+            email: email,
             id: id
         });
     };
@@ -41,9 +41,9 @@ class Users {
 
 const users = new Users();
 
-users.setNewUser('John', 23, users.getLength()+1);
-users.setNewUser('Mary', 21, users.getLength()+1);
-users.setNewUser('Alex', 27, users.getLength()+1);
-users.setNewUser('Vladimir', 25, users.getLength()+1);
+users.setNewUser('John', 'john@gmail.com', users.getLength()+1);
+users.setNewUser('Mary', 'mary@gmail.com', users.getLength()+1);
+users.setNewUser('Alex', 'alex@gmail.com', users.getLength()+1);
+users.setNewUser('Vladimir', 'vladimir@gmail.com', users.getLength()+1);
 
 exports.users = users;
