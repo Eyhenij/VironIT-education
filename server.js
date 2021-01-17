@@ -1,11 +1,13 @@
-const http = require('http');
-const {reqHandler} = require('./reqHandler.js');
+const express = require('express');
+const path = require('path');
 
 const port = 3000;
 const hostname = 'localhost';
+const app = express();
 
-const server = http.createServer(reqHandler);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api/users', require('./routes/api/users')); //users API routes
 
-server.listen(port, hostname, () => {
+app.listen(port, hostname, () => {
     console.log(`Server has been running at http://${hostname}:${port}`);
 });

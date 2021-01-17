@@ -39,9 +39,9 @@ class Users {
 
 const users = new Users();
 
-users.setNewUser('John', 23, 1);
-users.setNewUser('Mary', 21, 2);
-users.setNewUser('Alex', 27, 3);
-users.setNewUser('Vladimir', 25, 4);
+users.setNewUser('John', 23, users.getLength()+1);
+users.setNewUser('Mary', 21, users.getLength()+1);
+users.setNewUser('Alex', 27, users.getLength()+1);
+users.setNewUser('Vladimir', 25, users.getLength()+1);
 
 exports.users = users;
