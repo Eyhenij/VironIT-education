@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 class UsersService {
 
     _state = [];
@@ -35,6 +38,17 @@ class UsersService {
 
     getLength() {
         return this._state.length;
+    };
+
+    saveUsersToFile() {
+        const content = JSON.stringify(this.getUsers());
+        const filePath = path.resolve(__dirname, 'usersFile.json');
+
+        fs.writeFile(filePath, content, (error) => {
+            if (error) {
+                throw error;
+            }
+        });
     };
 
 }

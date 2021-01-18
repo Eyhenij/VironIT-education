@@ -4,6 +4,7 @@ class UsersController{
     service = new UsersService();
 
     get(req, res) {
+        this.service.saveUsersToFile();
         res
             .status(200)
             .json(this.service.getUsers());
@@ -25,6 +26,7 @@ class UsersController{
         const id = this.service.getLength() + 1;
         if(name && email) {
             this.service.setNewUser(name, email, id);
+            this.service.saveUsersToFile();
             res
                 .status(201)
                 .json({ message: `You just set new User ${id}: name - ${name}, email - ${email}.` });
@@ -39,6 +41,7 @@ class UsersController{
         if (req.body.arr) {
             const newArray = req.body.arr;
             this.service.putNewValueOfUsers(newArray);
+            this.service.saveUsersToFile();
             res
                 .status(201)
                 .json({ message: `You just put new array of users: ${this.service.getUsers()}` });
@@ -57,6 +60,7 @@ class UsersController{
             const user = this.service.getUsers().filter(elem => elem.id === id);
             user[0].name = name;
             user[0].email = email;
+            this.service.saveUsersToFile();
             res
                 .status(201)
                 .json({ updatedUser: user });
@@ -70,6 +74,7 @@ class UsersController{
     remove(req, res) {
         if (this.service.getUsers().map(elem => elem.id).includes(Number(req.params.id))) {
             this.service.deleteUser(Number(req.params.id));
+            this.service.saveUsersToFile();
             res
                 .status(200)
                 .json({ message: `User ${Number(req.params.id)} has been deleted` });
