@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/api/users', require('./routes/api/users')); //users API routes
+app.use('/api/users', require('./routes/api/users.router')); //users API routes
 
 app.listen(port, hostname, () => {
     console.log(`Server has been running at http://${hostname}:${port}`);

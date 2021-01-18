@@ -1,4 +1,4 @@
-class Users {
+class UsersService {
 
     _state = [];
 
@@ -39,11 +39,4 @@ class Users {
 
 }
 
-const users = new Users();
-
-users.setNewUser('John', 'john@gmail.com', users.getLength()+1);
-users.setNewUser('Mary', 'mary@gmail.com', users.getLength()+1);
-users.setNewUser('Alex', 'alex@gmail.com', users.getLength()+1);
-users.setNewUser('Vladimir', 'vladimir@gmail.com', users.getLength()+1);
-
-exports.users = users;
+exports.UsersService = UsersService;
