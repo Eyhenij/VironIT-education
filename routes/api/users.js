@@ -18,13 +18,13 @@ router.get('/:id', (req,res) => {
 // create new user
 router.post('/', (req, res) => {
     const name = req.body.name;
-    const email = Number(req.body.email);
+    const email = req.body.email;
     const id = users.getLength() + 1;
-    if(name && age) {
-        users.setNewUser(name, age, id);
+    if(name && email) {
+        users.setNewUser(name, email, id);
         res.json({ message: `You just set new User ${id}: name - ${name}, email - ${email}.` });
     } else {
-        res.status(400).json({ message: 'Please, write name and age of new user and repeat request' })
+        res.status(400).json({ message: 'Please, write name and email of new user and repeat request' })
     }
 });
 
@@ -43,13 +43,13 @@ router.put('/', (req, res) => {
 // update one user by id
 router.put('/:id', (req,res) => {
     const name = req.body.name;
-    const email = Number(req.body.email);
+    const email = req.body.email;
     const id = Number(req.params.id);
     if (name && email && users.getUsers().map(elem => elem.id).includes(id)) {
         const user = users.getUsers().filter(elem => elem.id === id);
         user[0].name = name;
         user[0].email = email;
-        res.json({ message: 'user updated', user });
+        res.json({ updatedUser: user });
     } else {
         res.status(400).json({ message: 'There is no the id which you are requiring' });
     }
