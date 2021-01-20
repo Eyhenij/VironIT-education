@@ -76,11 +76,13 @@ class UsersService {
         fs.writeFileSync(this._fileName, newArray);
     };
 
-    putNewPropsOfUserById(newName, newEmail, userId) {
+    putNewPropsOfUserById(newName, newEmail, newLogin, newPassword, userId) {
         const content = this.getUsers();
         const user = content.find(elem => elem.id === userId);
         user.name = newName;
         user.email = newEmail;
+        user.login = newLogin;
+        user.password = newPassword;
         this.putNewValueOfUsers(JSON.stringify(content));
     };
 
