@@ -116,8 +116,8 @@ class UsersService {
 
 const usersService = new UsersService();
 
-// usersService.setNewUser('John', 'john@gmail.com', '@john', 'djwAA2388irn1w312');
-// usersService.setNewUser('Mary', 'mary@gmail.com', '@mary', 'xjiyg3498chmkoi8s');
-// usersService.setNewUser('Vladimir', 'vladimir@gmail.com', '@vladimir', 'prtosdtk4389fdr65');
+usersService.setNewUser('John', 'john@gmail.com', '@john', 'djwAA2388irn1w312');
+usersService.setNewUser('Mary', 'mary@gmail.com', '@mary', 'xjiyg3498chmkoi8s');
+usersService.setNewUser('Vladimir', 'vladimir@gmail.com', '@vladimir', 'prtosdtk4389fdr65');
 
 module.exports = usersService;

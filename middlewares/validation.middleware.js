@@ -1,8 +1,6 @@
-const validationSchema = require('../validation-schemes/schema.js');
-
-const validation = async (req, res, next) => {
+const validation = (schema) => async (req, res, next) => {
     try {
-        await validationSchema.validateAsync(req.body);
+        await schema.validateAsync(req.body);
         next();
     } catch (e) {
         res.status(400).json(e.message);

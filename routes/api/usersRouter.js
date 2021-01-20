@@ -2,15 +2,17 @@ const express = require('express');
 const usersController = require('../../controllers/UsersController.js');
 const auth = require('../../middlewares/auth.middleware.js');
 const validation = require('../../middlewares/validation.middleware.js');
+const newUserSchema = require('../../validation-schemes/newUserSchema.js');
+const newUsersArraySchema = require('../../validation-schemes/newUsersArraySchema.js');
 
 const router = express.Router();
 
 router
     .get('/', auth, usersController.get)
     .get('/:id', auth, usersController.getById)
-    .post('/', auth, validation, usersController.add)
-    .put('/',auth, validation, usersController.rewrite)
-    .put('/:id',auth, validation, usersController.rewriteById)
+    .post('/', auth, validation(newUserSchema), usersController.add)
+    .put('/',auth, validation(newUsersArraySchema), usersController.rewrite)
+    .put('/:id',auth, validation(newUserSchema), usersController.rewriteById)
     .delete('/:id', auth, usersController.remove);
 
 module.exports = router;
