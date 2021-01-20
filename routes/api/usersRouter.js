@@ -1,14 +1,16 @@
 const express = require('express');
 const usersController = require('../../controllers/UsersController.js');
+const auth = require('../../middlewares/auth.middleware.js');
 
 const router = express.Router();
 
-router.get('/', usersController.get)
-    .get('/:id', usersController.getById)
-    .post('/', usersController.add)
-    .put('/', usersController.rewrite)
-    .put('/:id', usersController.rewriteById)
-    .delete('/:id', usersController.remove);
+router
+    .get('/', auth, usersController.get)
+    .get('/:id', auth, usersController.getById)
+    .post('/', auth, usersController.add)
+    .put('/',auth, usersController.rewrite)
+    .put('/:id',auth, usersController.rewriteById)
+    .delete('/:id', auth, usersController.remove);
 
 module.exports = router;
 
