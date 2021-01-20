@@ -31,7 +31,7 @@ class UsersController {
     };
 
     rewriteById = (req, res) => {
-        this.service.putNewPropsOfUserById(req.body.name, req.body.email, req.params.id);
+        this.service.putNewPropsOfUserById(req.body.name, req.body.email, req.body.login, req.body.password, req.params.id);
         res
             .status(201)
             .json({updatedUser: this.service.getUserById(req.params.id)});

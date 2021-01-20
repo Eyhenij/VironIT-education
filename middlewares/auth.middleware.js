@@ -7,7 +7,6 @@ const auth = (req, res, next) => {
         const result = jwt.verify(token, usersService.jwtSignature);
         const userData = usersService.getUsers().filter(elem => elem.login === result.payload.login);
         if(userData) {
-            console.log(userData);
         }else if(userData.role !== result.payload.role) {
             res.status(401).send('Invalid user data');
         } else {
