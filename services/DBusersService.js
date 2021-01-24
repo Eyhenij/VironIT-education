@@ -7,24 +7,12 @@ class UsersService {
 
     jwtSecretPhrase = 'ahjhgfo-i92-307-wh2-232-ahweoi3';
 
-    _hashOfPassword(passwordFromUser, saltRounds) {
-        return bcrypt.hashSync(passwordFromUser, saltRounds);
-    };
-
     _generateToken(userData, type) {
         return jwt.sign({ ...userData, type: type }, this.jwtSecretPhrase);
     };
 
     setNewUser(userData) {
-        const salt = Math.round(Math.random() * 10);
-        const hashPassword = this._hashOfPassword(userData.password, salt).toString();
-
-        User.create({
-            ...userData,
-            password: hashPassword,
-            salt: salt,
-            role: 'user'
-        });
+        User.create({ ...userData });
     };
 
     getUsers() {
@@ -44,20 +32,7 @@ class UsersService {
     };
 
     putNewPropsOfUserById(newUserData, userId) {
-        if(newUserData.password) {
-            const salt = Math.round(Math.random() * 10);
-            const hashPassword = this._hashOfPassword(newUserData.password, salt).toString();
-
-            User.update({
-                ...newUserData,
-                salt: salt,
-                password: hashPassword
-            }, {where: {id: userId}});
-        } else {
-            User.update({
-                ...newUserData
-            }, {where: {id: userId}});
-        }
+        User.update({ ...newUserData }, {where: {id: userId}});
     };
 
     deleteUser(userId) {
