@@ -12,7 +12,7 @@ router
     .get('/:id', auth, usersController.getById)
     .post('/', auth, validation(newUserSchema), usersController.add)
     .put('/',auth, validation(newUsersArraySchema), usersController.rewrite)
-    .put('/:id',auth, validation(newUserSchema), usersController.rewriteById)
+    .put('/:id',auth, usersController.rewriteById)
     .delete('/:id', auth, usersController.remove);
 
 module.exports = router;

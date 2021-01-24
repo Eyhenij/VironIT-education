@@ -1,51 +1,50 @@
-const usersService = require('../services/UsersService.js');
+const usersService = require('../services/DBusersService.js');
 
 class UsersController {
     service = usersService;
 
-    get = (req, res) => {
+    get = async (req, res) => {
         res
             .status(200)
-            .json(this.service.getUsers());
+            .json(await this.service.getUsers());
     };
 
-    getById = (req, res) => {
+    getById = async (req, res) => {
         res
             .status(200)
-            .json(this.service.getUserById(req.params.id));
+            .json(await this.service.getUserById(req.params.id));
     };
 
-
-    add = (req, res) => {
-        this.service.setNewUser(req.body.name, req.body.email, req.body.login, req.body.password);
+    add = async (req, res) => {
+        await this.service.setNewUser(req.body);
         res
             .status(201)
             .json({message: `You just set new User: login - ${req.body.login}, email - ${req.body.email}.`});
     };
 
-    rewrite = (req, res) => {
-        this.service.putNewValueOfUsers(req.body.arr);
+    rewrite = async (req, res) => {
+        await this.service.putNewValueOfUsers(req.body.arr);
         res
             .status(201)
-            .json({message: `You just put new array of users: ${this.service.getUsers()}`});
+            .json({message: 'You just put new array of users'});
     };
 
-    rewriteById = (req, res) => {
-        this.service.putNewPropsOfUserById(req.body.name, req.body.email, req.body.login, req.body.password, req.params.id);
+    rewriteById = async (req, res) => {
+        await this.service.putNewPropsOfUserById(req.body, req.params.id);
         res
             .status(201)
-            .json({updatedUser: this.service.getUserById(req.params.id)});
+            .json(`User ${req.params.id} has been updated`);
     };
 
-    remove = (req, res) => {
-        this.service.deleteUser(req.params.id);
+    remove = async (req, res) => {
+        await this.service.deleteUser(req.params.id);
         res
             .status(200)
             .json({message: `User ${req.params.id} has been deleted`});
     };
 
-    login = (req, res) => {
-        const authToken = this.service.checkPassword(req.body.login, req.body.password);
+    login = async (req, res) => {
+        const authToken = await this.service.checkPassword(req.body);
         res
             .status(200)
             .json(JSON.stringify(authToken));
