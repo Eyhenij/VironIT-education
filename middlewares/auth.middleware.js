@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
         const userData = await usersService.getUserById(result.id);
         if(!userData) {
             res.status(401).send('User not found');
-        } else if(userData[0].role !== result.role) {
+        } else if(userData.role !== result.role) {
             res.status(401).send('Invalid user data');
         }
     } catch (e) {

@@ -32,7 +32,7 @@ class UsersService {
     };
 
     getUserById(userId) {
-        return User.findAll({raw: true, where: {id: userId}});
+        return User.findByPk(userId, {raw: true});
     };
 
     putNewValueOfUsers(newArray) {
@@ -65,12 +65,10 @@ class UsersService {
     };
 
     async checkPassword(loginData) {
-        const user = await User.findAll({raw: true, where: {login: loginData.login}});
-        console.log(user[0].password);
+        const user = await User.findOne({where: {login: loginData.login}});
         if(user) {
-            if (bcrypt.compareSync(loginData.password, user[0].password)) {
-                console.log('success!');
-                return this._generateToken(user[0], 'access');
+            if (bcrypt.compareSync(loginData.password, user.password)) {
+                return this._generateToken(user, 'access');
             } else {
                 throw new Error('You have entered incorrect password');
             }
