@@ -1,6 +1,7 @@
 const express = require('express');
 const usersRouter = require('./routes/api/usersRouter.js');
 const authRouter = require('./routes/api/authRouter.js');
+require('dotenv').config();
 
 const port = 3000;
 const hostname = 'localhost';

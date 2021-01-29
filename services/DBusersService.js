@@ -5,10 +5,8 @@ const User = require('../models/usersdb.js');
 
 class UsersService {
 
-    jwtSecretPhrase = 'ahjhgfo-i92-307-wh2-232-ahweoi3';
-
     _generateToken(userData, type) {
-        return jwt.sign({ ...userData, type: type }, this.jwtSecretPhrase);
+        return jwt.sign({ ...userData, type: type }, process.env.JWT_PHRASE);
     };
 
     setNewUser(userData) {

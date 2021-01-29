@@ -4,7 +4,7 @@ const usersService = require('../services/DBusersService.js');
 const auth = async (req, res, next) => {
     try {
         const [strategy, token] = req.headers['authorization'].split(' ');
-        const result = jwt.verify(token, usersService.jwtSecretPhrase);
+        const result = jwt.verify(token, process.env.JWT_PHRASE);
         const userData = await usersService.getUserById(result.dataValues.id);
         if(!userData) {
             res.status(401).send('User not found');
