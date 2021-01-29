@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const newUserSchema = Joi.object({
+const newUserSchema = Joi.object().keys({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     login: Joi.string().required(),

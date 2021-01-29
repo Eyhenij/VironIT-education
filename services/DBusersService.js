@@ -26,7 +26,7 @@ class UsersService {
             where: {},
             truncate:true
         })
-        User.bulkCreate(JSON.parse(newArray));
+        User.bulkCreate(newArray);
     };
 
     putNewPropsOfUserById(newUserData, userId) {
