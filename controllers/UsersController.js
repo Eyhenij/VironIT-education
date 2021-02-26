@@ -19,7 +19,7 @@ class UsersController {
         await this.service.setNewUser(req.body);
         res
             .status(201)
-            .json({message: `You just set new User: login - ${req.body.login}, email - ${req.body.email}.`});
+            .json({message: `You just create new User: login - ${req.body.login}, email - ${req.body.email}.`});
     };
 
     rewrite = async (req, res) => {
@@ -33,7 +33,7 @@ class UsersController {
         await this.service.putNewPropsOfUserById(req.body, req.params.id);
         res
             .status(201)
-            .json(`User ${req.params.id} has been updated`);
+            .json({message: `User ${req.params.id} has been updated`});
     };
 
     remove = async (req, res) => {
@@ -44,10 +44,10 @@ class UsersController {
     };
 
     login = async (req, res) => {
-        const authToken = await this.service.checkPassword(req.body);
+        const authResponse = await this.service.getAuthData(req.body);
         res
             .status(200)
-            .json(JSON.stringify(authToken));
+            .json(authResponse);
     };
 
 }

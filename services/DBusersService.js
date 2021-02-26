@@ -37,18 +37,25 @@ class UsersService {
         User.destroy({where: {id: userId}});
     };
 
-    async checkPassword(loginData) {
-        const user = await User.findOne({where: {login: loginData.login}});
-        if(user) {
+    _checkPassword(loginData, user) {
             if (bcrypt.compareSync(loginData.password, user.password)) {
                 return this._generateToken(user, 'access');
             } else {
                 throw new Error('You have entered incorrect password');
             }
-        } else {
+    };
+
+    async getAuthData(loginData) {
+        const user = await User.findOne({where: {login: loginData.login}});
+        if (!user) {
             throw new Error('user not found');
         }
-    };
+        const token = await this._checkPassword(loginData, user);
+        return {
+            profile: user,
+            token: `Bearer ${token}`
+        };
+    }
 
 }
 

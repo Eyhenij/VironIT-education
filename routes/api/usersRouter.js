@@ -10,9 +10,9 @@ const router = express.Router();
 router
     .get('/', auth, usersController.get)
     .get('/:id', auth, usersController.getById)
-    .post('/', auth, validation(newUserSchema), usersController.add)
-    .put('/',auth, validation(newUsersArraySchema), usersController.rewrite)
-    .put('/:id',auth, usersController.rewriteById)
+    .post('/', validation(newUserSchema), usersController.add)
+    .put('/', auth, validation(newUsersArraySchema), usersController.rewrite)
+    .put('/:id', auth, usersController.rewriteById)
     .delete('/:id', auth, usersController.remove);
 
 module.exports = router;
